@@ -349,7 +349,7 @@ class Particle:
         x = float(self.p.x.item())
         y = float(self.p.y.item())
         r = float(self.p.r.item())
-        return circle(canvas, toX(x), toY(y), toP(r), color=self.c)
+        return circle(canvas, toX(x), toY(y), toP(r), color=self.c) 
 
     def move(self):
         self.p = ParticleState(self.p.x+self.p.vx*TIMESTEP,
