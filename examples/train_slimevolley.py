@@ -59,7 +59,7 @@ def parse_args():
     parser.add_argument(
         '--n-repeats', type=int, default=16, help='Training repetitions.')
     parser.add_argument(
-        '--max-iter', type=int, default=10, help='Max training iterations.')
+        '--max-iter', type=int, default=500, help='Max training iterations.')
     parser.add_argument(
         '--test-interval', type=int, default=50, help='Test interval.')
     parser.add_argument(
@@ -144,7 +144,7 @@ def main(config):
         # Extract scalar values from the batched state
         state_numpy = jax.device_get(task_state)
         # Assuming the first element of the batch is what we want to visualize
-        unbatched_state = jax.tree_map(lambda x: x[0], state_numpy)
+        unbatched_state = jax.tree.map(lambda x: x[0], state_numpy)
         
         try:
             screen = SlimeVolley.render(unbatched_state)
