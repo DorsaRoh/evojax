@@ -38,6 +38,8 @@ https://github.com/hardmaru/slimevolleygym
 
 import math
 import numpy as np
+import jax.numpy as jnp
+
 
 from typing import Tuple
 
@@ -591,13 +593,13 @@ class Agent:
         return getObsArray(self.state)
 
     def display(self, canvas, ball_x, ball_y):
-        bx = float(ball_x)
-        by = float(ball_y)
+        bx = float(jnp.squeeze(ball_x))
+        by = float(jnp.squeeze(ball_y))
         p = self.p
-        x = float(p.x)
-        y = float(p.y)
-        r = float(p.r)
-        direction = int(p.direction)
+        x = float(jnp.squeeze(p.x))
+        y = float(jnp.squeeze(p.y))
+        r = float(jnp.squeeze(p.r))
+        direction = int(jnp.squeeze(p.direction))
 
         angle = math.pi * 60 / 180
         if direction == 1:
@@ -624,7 +626,7 @@ class Agent:
                         color=(0, 0, 0))
 
         # draw coins (lives) left
-        num_lives = int(p.life)
+        num_lives = int(jnp.squeeze(p.life))
         for i in range(1, num_lives):
             canvas = circle(canvas, toX(direction*(REF_W/2+0.5-i*2.)),
                             WINDOW_HEIGHT-toY(1.5), toP(0.5),
